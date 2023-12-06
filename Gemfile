@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+gem 'rubocop', '1.57.2'
 
 ruby "3.0.2"
 
