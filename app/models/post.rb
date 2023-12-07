@@ -1,23 +1,23 @@
 class Post < ApplicationRecord
-    belongs_to :user,foreign_key: :author_id
-    has_many :comments
-    has_many :likes
+  belongs_to :user, foreign_key: :author_id
+  has_many :comments
+  has_many :likes
 
-    # method that returns the 5 most recent comments for a given comment
-    scope :five_most_recent_posts_for_comment, ->(post_id){
-        where(id: post_id).order(created_at: :desc).limit(5) }
-    
-    after_create :update_post_counter
-    after_destroy :decrement_post_counter
+  # method that returns the 5 most recent comments for a given comment
+  scope :five_most_recent_posts_for_comment, lambda { |post_id|
+                                               where(id: post_id).order(created_at: :desc).limit(5)
+                                             }
 
+  after_create :update_post_counter
+  after_destroy :decrement_post_counter
 
-    private 
-    def update_post_counter
-        self.user.increment!(:PostsCounter)
-    end
+  private
 
-    def decrement_post_counter
-       self.user.decrement!(:PostsCounter)
-    end
+  def update_post_counter
+    user.increment!(:PostsCounter)
+  end
 
+  def decrement_post_counter
+    user.decrement!(:PostsCounter)
+  end
 end
