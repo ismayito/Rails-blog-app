@@ -2,6 +2,9 @@ class Post < ApplicationRecord
   belongs_to :author, class_name: 'User'
   has_many :comments
   has_many :likes
+  validates :Title, presence: true, length: { maximum: 250 }
+  validates :LikesCounter, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :CommentsCounter, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   after_create :update_post_counter
   after_destroy :decrement_post_counter
@@ -14,10 +17,10 @@ class Post < ApplicationRecord
   private
 
   def update_post_counter
-    user.increment!(:PostsCounter)
+    author.increment!(:PostsCounter)
   end
 
   def decrement_post_counter
-    user.decrement!(:PostsCounter)
+    author.decrement!(:PostsCounter)
   end
 end
