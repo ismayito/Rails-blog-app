@@ -100,7 +100,10 @@ Example command:
 
 ```sh
   cd Rails-blog-app;
-```
+````
+```sh to run the server of the project
+  rails server 
+````
 --->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
