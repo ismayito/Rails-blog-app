@@ -22,4 +22,19 @@ RSpec.describe 'Users', type: :request do
       assert_match 'Shows a specific user', @response.body
     end
   end
+
+  describe 'GET /index' do
+    it 'renders the index template' do
+      get users_url
+      expect(response).to render_template(:index)
+    end
+  end
+
+  describe 'GET /show' do
+    it 'renders the show template' do
+      user = User.create(Name: 'Test User', Photo: 'http://example.com', Bio: 'developer', PostsCounter: 0)
+      get user_url(user)
+      expect(response).to render_template(:show)
+    end
+  end
 end
