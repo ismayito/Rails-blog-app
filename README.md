@@ -82,20 +82,17 @@ In order to run this project you need:
 
 Clone this repository to your desired folder:
 
-<!--
 Example commands:
 
 ```sh
   cd my-folder
   git clone https://github.com/ismayito/Rails-blog-app.git
 ```
---->
 
 ### Usage
 
 To run the project, execute the following command:
 
-<!--
 Example command:
 
 ```sh
@@ -104,7 +101,6 @@ Example command:
 ```sh to run the server of the project
   rails server 
 ````
---->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
