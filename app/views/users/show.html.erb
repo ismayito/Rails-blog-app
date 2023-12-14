@@ -4,7 +4,7 @@
 <p><%= @user.Bio %></p>
 </div>
 <div>
-<% @user.posts.each_with_index do |post,index| %>
+<% @user.recent_post.each_with_index do |post,index| %>
 <div class='user-post'>
 <%= link_to user_post_url(post.id), class:'user-link' do %>
     <p class='post-number'>Post #<%= index+1 %></p>
