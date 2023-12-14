@@ -1,1 +1,24 @@
-<h1> Shows a single post from a user ...</h1>
+<div class='author-post'>
+<div class='post-intro'>
+<p class="post-title">Post#1 by <%= @post.author.Name %></p>
+<p class='post-counters'>
+<% if @post.CommentsCounter.nil? %>
+  Comments:0 
+<% else %>
+  Comments:<%= @post.CommentsCounter %>, 
+<% end %>
+<% if @post.LikesCounter.nil? %>
+  Likes:0 
+<% else %>
+  Likes:<%= @post.LikesCounter %> </p> 
+<% end %>
+</div>
+<p><%= @post.Text %></p>
+</div>
+<div class='user-comments'>
+ <% @post.comments.each do |comment| %>
+    <p><%= @post.author.Name %>: <%= comment.Text %></p>
+ <% end %>
+</div>
+
+

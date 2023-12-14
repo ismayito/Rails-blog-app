@@ -1,1 +1,35 @@
-<h1>Shows a specific user</h1>
+<%= render partial:"user",locals: {user:@user} %>
+<div class="user-bio">
+<p>Bio:</p>
+<p><%= @user.Bio %></p>
+</div>
+<div>
+<% @user.recent_post.each_with_index do |post,index| %>
+<div class='user-post'>
+<%= link_to user_post_url(post.id), class:'user-link' do %>
+    <p class='post-number'>Post #<%= index+1 %></p>
+    <div class='post-container'>
+      <p class='user-post-text'><%= post.Text %></p>
+      <p class="comment-likes">
+      <% if post.CommentsCounter.nil? %>
+          Comments:0 
+        <% else %>
+          Comments:<%= post.CommentsCounter %>, 
+        <% end %>
+        <% if post.LikesCounter.nil? %>
+          Likes:0 
+        <% else %>
+          Likes:<%= post.LikesCounter %> </p> 
+          <% end %>
+      </p>
+    </div>
+</div>
+<% end%>
+<% end %>
+</div>
+<section class='button-container'>
+<%= link_to user_posts_url(@user.id), class:"user-link" do  %>
+  <button type="button" class="see-all">See all posts</button> 
+<% end %>  
+</section>
+
