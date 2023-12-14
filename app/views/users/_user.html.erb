@@ -1,0 +1,13 @@
+<%= tag.div class:'user-container' do %> 
+  <%= tag.img  src:user.Photo, class:'user-image' %> 
+  <div class='user-info'>
+  <h3 class='user-name'>Name: <%= user.Name %> </h3>
+   <p class='post-counter'>
+   <% if user.PostsCounter.nil? %>
+    Number of posts:0
+   <% else %>
+     Number of posts: <%= user.PostsCounter %>
+   <% end %>
+   </p>
+  </div>
+ <% end %>
