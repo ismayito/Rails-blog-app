@@ -115,3 +115,48 @@ body {
   text-align: right;
   font-size: 16px;
 }
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  margin: 6px 0;
+}
+
+.form-description {
+  margin: 12px 0;
+}
+
+.form-submit {
+  margin: 12px 0;
+  padding: 12px;
+}
+
+.create-post-container {
+  display: flex;
+  justify-content: end;
+}
+
+.create-btn {
+  padding: 12px;
+  font-size: 24px;
+  background-color: blue;
+  margin: 12px;
+  text-align: end;
+  color: white;
+}
+
+.comment-btn {
+  padding: 6px;
+  font-size: 18px;
+  background-color: blue;
+  margin: 6px;
+  color: white;
+}
+
+.like-comment-container {
+  display: flex;
+  justify-content: end;
+}
