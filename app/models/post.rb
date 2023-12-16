@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  before_validation :set_defaults
   belongs_to :author, class_name: 'User'
   has_many :comments
   has_many :likes
@@ -14,13 +15,18 @@ class Post < ApplicationRecord
     comments.order('created_at Desc').limit(5)
   end
 
-  private
-
   def update_post_counter
     author.increment!(:PostsCounter)
   end
 
   def decrement_post_counter
     author.decrement!(:PostsCounter)
+  end
+
+  private
+
+  def set_defaults
+    self.LikesCounter ||= 0
+    self.CommentsCounter ||= 0
   end
 end

@@ -1,7 +1,11 @@
 
 <% @posts_by_author.each do |author,posts| %>
 <%= render partial:'users/user',locals:{user:author} %>
-
+<div class="create-post-container">
+<%= link_to new_user_post_url do %>
+  <button class="create-btn" >Create Post</button>
+<% end %>
+</div>
 <% posts.each_with_index do   |post,index| %>
     <div class='user-post'>
     <%= link_to user_post_url(user_id: post.author.id, id: post.id), class:'user-post' do %>
@@ -22,7 +26,19 @@
       </p>
     </div>
     <% end%>
-    </div>
+<div class="like-comment-container">   
+<div class="create-post-container">
+<%= link_to new_user_post_comment_url(post_id: post.id) do %>
+  <button class="comment-btn" >Comment</button>
+<% end %>
+</div>
+<div class="create-post-container">
+<%= link_to new_user_post_like_url(post_id: post.id) do %>
+  <button class="comment-btn" >Like</button>
+<% end %>
+</div>
+</div> 
+</div>
 <% if post.comments.empty? %> 
  <div class='none'></div>
  <% else %>
@@ -33,6 +49,7 @@
   </div>
   <% end %>
 <% end %>
+
 <% end %>
 
 <section class='button-container'>

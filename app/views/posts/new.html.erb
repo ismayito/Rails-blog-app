@@ -1,0 +1,8 @@
+<h1>Create a new post</h1>
+<%= form_with(model:@post,url: user_posts_path, method: :post,local: true,class:'post-form') do |form| %>
+    <%= form.label:Title, "Post title:", class:"form-label"%>
+    <%= form.text_field:Title %>
+    <%= form.label:Text, 'Post Text' ,class:"form-description" %>
+    <%= form.text_area:Text,size:"50x10" %>
+    <%= form.submit 'Create post' ,class:"form-submit" %>
+<% end %>
