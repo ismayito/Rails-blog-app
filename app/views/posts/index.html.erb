@@ -33,9 +33,9 @@
 <% end %>
 </div>
 <div class="create-post-container">
-<%= link_to new_user_post_like_url(post_id: post.id) do %>
-  <button class="comment-btn" >Like</button>
-<% end %>
+  <button class="comment-btn" >
+   <%= render partial: 'likes/likes_button',locals:{post:post} %>
+  </button>
 </div>
 </div> 
 </div>
