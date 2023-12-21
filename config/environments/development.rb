@@ -75,4 +75,6 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
   # This is useful if you are going to send some emails to the users.
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
 end
