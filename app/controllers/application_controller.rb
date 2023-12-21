@@ -13,11 +13,4 @@ class ApplicationController < ActionController::Base
   def configure_sign_in_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_in, keys: [:Name])
   end
-  # helper_method :current_user
-
-  # private
-
-  # def current_user
-  #   @current_user ||= User.first
-  # end
 end
