@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include CanCan::ControllerAdditions
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :configure_sign_in_permitted_parameters, if: :devise_controller?
 

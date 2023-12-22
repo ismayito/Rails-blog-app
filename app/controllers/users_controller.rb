@@ -10,6 +10,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def admin?
+    'admin'
+  end
+
   private
 
   def require_login

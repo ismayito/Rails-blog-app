@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
+  skip_authorization_check only: [:create]
   def index
     @posts_by_author = Post.includes(:author).group_by(&:author)
   end
@@ -25,11 +27,9 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    puts 'Destroy action executed' # Check the server logs
-
     respond_to do |format|
       format.html { redirect_to user_posts_path(user_id: @post.author_id) }
-      format.js # This line is important for handling AJAX requests
+      format.js
     end
   end
 end
