@@ -29,8 +29,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to user_posts_path(user_id: @post.author_id) }
-      format.js   # This line is important for handling AJAX requests
+      format.js # This line is important for handling AJAX requests
     end
   end
-  
 end

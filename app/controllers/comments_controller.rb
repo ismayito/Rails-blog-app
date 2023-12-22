@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
     flash[:notice] = 'Comment successfully deleted.'
     redirect_to user_post_path(@post.author_id, @post.id)
   end
-  
+
   private
 
   def set_user_and_post
