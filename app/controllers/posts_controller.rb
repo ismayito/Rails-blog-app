@@ -21,4 +21,16 @@ class PostsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    puts 'Destroy action executed' # Check the server logs
+
+    respond_to do |format|
+      format.html { redirect_to user_posts_path(user_id: @post.author_id) }
+      format.js   # This line is important for handling AJAX requests
+    end
+  end
+  
 end
