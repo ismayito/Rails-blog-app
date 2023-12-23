@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_user_and_post
+  before_action :set_user_and_post, only: [:create]
 
   def index
     @comment = Comment.new
