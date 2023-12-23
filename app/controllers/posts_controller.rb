@@ -8,8 +8,8 @@ class PostsController < ApplicationController
       serialized_posts[author] = post.as_json(only: %i[Text Title])
     end
     respond_to do |format|
-      format.html 
-      format.json { render:json => serialized_posts }
+      format.html
+      format.json { render json: serialized_posts }
     end
   end
 
@@ -41,8 +41,9 @@ class PostsController < ApplicationController
     end
   end
 
-  private 
-  def post_params 
+  private
+
+  def post_params
     params.require(:post).permit(:Title, :Text)
   end
 end
