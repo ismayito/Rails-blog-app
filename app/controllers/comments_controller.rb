@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_user_and_post
   def new
     @comment = Comment.new
@@ -13,6 +14,14 @@ class CommentsController < ApplicationController
       flash.now[:error] = 'Post not saved, check your Entries'
       render :new
     end
+  end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    @post = @comment.post
+    @comment.destroy
+    flash[:notice] = 'Comment successfully deleted.'
+    redirect_to user_post_path(@post.author_id, @post.id)
   end
 
   private

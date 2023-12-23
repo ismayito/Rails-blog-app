@@ -14,10 +14,16 @@
 <% end %>
 </div>
 <p><%= @post.Text %></p>
+<%if can?(:destroy, @post)%>
+ <%= button_to "DELETE POST", user_post_path(user_id:@post.author_id, id:@post.id), method: :delete, data: { turbolinks: false } %>  
+<% end %>
 </div>
 <div class='user-comments'>
  <% @post.comments.each do |comment| %>
-    <p><%= @post.author.Name %>: <%= comment.Text %></p>
+  <%if can?(:destroy, comment)%>
+  <%= button_to "DELETE COMMENT", user_post_comment_path(user_id: comment.user_id, post_id: comment.post_id, id: comment.id), method: :delete, data: { turbolinks: false } %>  
+  <% end %>  
+  <p><%= @post.author.Name %>: <%= comment.Text %></p>
  <% end %>
 </div>
 

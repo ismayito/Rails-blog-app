@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
+  skip_authorization_check only: [:create]
   def index
     @posts_by_author = Post.includes(:author).group_by(&:author)
   end
@@ -19,6 +21,15 @@ class PostsController < ApplicationController
     else
       flash.now[:error] = 'Post not saved, check your Entries'
       render :new
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    respond_to do |format|
+      format.html { redirect_to user_posts_path(user_id: @post.author_id) }
+      format.js
     end
   end
 end
