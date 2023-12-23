@@ -3,6 +3,11 @@ class PostsController < ApplicationController
   skip_authorization_check only: [:create]
   def index
     @posts_by_author = Post.includes(:author).group_by(&:author)
+    serialized_posts = {}
+    @posts_by_author.each do |author, post|
+      serialized_posts[author] = post.as_json(only: %i[Text Title])
+    end
+    render json: serialized_posts
   end
 
   def show

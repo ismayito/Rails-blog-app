@@ -1,6 +1,12 @@
 class CommentsController < ApplicationController
   load_and_authorize_resource
   before_action :set_user_and_post
+
+  def index
+    @comment = Comment.new
+    render json: @comment, only: [:Text]
+  end
+
   def new
     @comment = Comment.new
   end
