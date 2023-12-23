@@ -8,11 +8,16 @@ Rails.application.routes.draw do
 
   #Define Api routes
   namespace :api do
+
     namespace :v1 do
-      resources :posts, only: [:index]
-      resources :comments, only: [:index, :create]
+      resources :users, only: [:index] do
+        resources :posts, only: [:index] do
+          resources :comments, only: [:index, :create]
+        end
+      end
     end
   end
+
 
   # Defines the root path route ("/")
   root "users#index"

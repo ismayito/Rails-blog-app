@@ -1,15 +1,21 @@
 class Api::V1::CommentsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: %i[create]
   def index
-    user_posts = current_user.posts.includes(:comments)
-    comments_by_post = user_posts.map { |post| { post_id: post.id, comments: post.comments } }
-    render json: { success: true, comments_by_post: comments_by_post }
+    @user = User.find(params[:user_id])
+    @posts = @user.posts
+    if @posts.present?
+      render json: { success: true, user: { user_id: @user.id, Name: @user.Name, posts: @posts } }
+    else
+      render json: { success: false, message: 'No posts found' }, status: :not_found
+    end
   end
 
   def create
-    post = current_user.posts.find_by(id: params[:post_id])
+    @user = User.find(params[:user_id])
+    post = @user.posts.find_by(id: params[:post_id])
     if post
       comment = post.comments.build(comment_params)
-      comment.user = current_user
+      comment.user = @user
       if comment.save
         render json: { success: true, message: 'Comment created successfully' }, status: :created
       else
