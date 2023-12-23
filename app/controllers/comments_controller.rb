@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @post.comments.build(params.require(:comment).permit(:Text).merge(user_id: current_user.id))
+    @comment = @post.comments.build(comment_params.merge(user_id: current_user.id))
     if @comment.save
       render json: @comment
       flash[:success] = 'Comment saved successfully'
@@ -32,6 +32,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def comment_params
+    params.require(:comment).permit(:Text)
+  end
 
   def set_user_and_post
     @user = User.find(params[:user_id])
