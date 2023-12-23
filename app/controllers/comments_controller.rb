@@ -14,7 +14,11 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.build(comment_params.merge(user_id: current_user.id))
     if @comment.save
-      render json: @comment
+
+      respond_to do |format|
+        format.html { user_post_path(@post, @user) }
+        format.json { render json: @comment}
+      end
       flash[:success] = 'Comment saved successfully'
       redirect_to user_post_path(@post, @user)
     else
