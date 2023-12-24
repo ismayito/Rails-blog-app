@@ -1,13 +1,23 @@
 class CommentsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_user_and_post
+  before_action :set_user_and_post, only: [:create]
+
+  def index
+    @comment = Comment.new
+    render json: @comment, only: [:Text]
+  end
+
   def new
     @comment = Comment.new
   end
 
   def create
-    @comment = @post.comments.build(params.require(:comment).permit(:Text).merge(user_id: current_user.id))
+    @comment = @post.comments.build(comment_params.merge(user_id: current_user.id))
     if @comment.save
+
+      respond_to do |format|
+        format.html { user_post_path(@post, @user) }
+      end
       flash[:success] = 'Comment saved successfully'
       redirect_to user_post_path(@post, @user)
     else
@@ -25,6 +35,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def comment_params
+    params.require(:comment).permit(:Text)
+  end
 
   def set_user_and_post
     @user = User.find(params[:user_id])
